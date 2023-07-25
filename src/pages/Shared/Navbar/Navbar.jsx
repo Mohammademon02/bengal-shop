@@ -2,16 +2,24 @@ import logo from '../../../assets/logo.png'
 import { MdOutlineShoppingBag } from 'react-icons/md';
 import { FiUser } from 'react-icons/fi';
 import { CgMenuLeftAlt } from 'react-icons/cg';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiMenu } from 'react-icons/fi';
 import { BiSearch } from 'react-icons/bi';
-import { AiFillCaretDown, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillCaretDown, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Navbar = () => {
+
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const handleMobileMenuToggle = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
         <nav>
 
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between mt-4'>
                 {/* nav logo */}
                 <div className='flex items-center'>
                     <img src={logo} alt="" />
@@ -19,7 +27,7 @@ const Navbar = () => {
                 </div>
 
                 {/* navbar search input */}
-                <div className='relative w-1/3'>
+                <div className='relative w-1/3 hidden sm:block'>
                     <input
                         type="text"
                         placeholder="Search here......"
@@ -37,7 +45,7 @@ const Navbar = () => {
                 {/* account and cart section */}
                 <div className='flex items-center'>
                     <p className='text-[#4F4F4F] mr-4'>
-                        <AiOutlineHeart/>
+                        <AiOutlineHeart />
                     </p>
                     <p className='ml-4 text-[#4F4F4F]'>
                         <MdOutlineShoppingBag />
@@ -45,17 +53,29 @@ const Navbar = () => {
                     <span className='p-3 bg-[#F2F2F2] rounded-full ml-6'>
                         <FiUser />
                     </span>
-                    <p className='text-[#4F4F4F] ml-2'>Account</p>
+                    <p className='text-[#4F4F4F] ml-2 hidden sm:block'>Account</p>
+                </div>
+
+                <div className="sm:hidden">
+                    <button
+                        onClick={handleMobileMenuToggle}
+                        className="text-[#4F4F4F] focus:outline-none"
+                    >
+                            {isMobileMenuOpen ? (
+                                <AiOutlineClose />
+                            ) : (
+                                <FiMenu />
+                            )}
+                        
+                    </button>
                 </div>
 
             </div>
 
-            {/* all Categories button and menu button */}
+            {/* all Categories button and menu  */}
             <div className='mt-4 flex items-center justify-between'>
-                <div className='bg-[#27AE60] inline-flex items-center text-white px-4 py-2 rounded-full '>
-                    <CgMenuLeftAlt /> <span className='px-12'>All Categories</span> <FiChevronDown />
-                </div>
-                <div className='flex'>
+                <div className={`hidden sm:flex items-center space-x-4 ${isMobileMenuOpen ? 'flex' : 'hidden'}`}>
+                    <Link className='bg-[#27AE60] inline-flex items-center text-white px-4 py-2 rounded-full mr-48' ><CgMenuLeftAlt /> <span className='px-12'>All Categories</span> <FiChevronDown /></Link>
                     <Link className='mr-9 inline-flex items-center text-[#4F4F4F]'>Home <AiFillCaretDown className='ml-2' /> </Link>
                     <Link className='mr-9 inline-flex items-center text-[#4F4F4F]'>Shop  <AiFillCaretDown className='ml-2' /></Link>
                     <Link className='mr-9 inline-flex items-center text-[#4F4F4F]'>Page  <AiFillCaretDown className='ml-2' /></Link>
@@ -63,13 +83,26 @@ const Navbar = () => {
                     <Link className='mr-9 inline-flex items-center text-[#4F4F4F]'>Contract  <AiFillCaretDown className='ml-2' /></Link>
                     <Link className='mr-9 inline-flex items-center text-[#4F4F4F]'>Track Order  <AiFillCaretDown className='ml-2' /></Link>
                 </div>
-                <div>
+                <div className='hidden sm:block'>
                     <p className='text-[#FF5C00] font-semibold'>
                         <span className='mr-2'>%</span>
                         Special Offers!
                     </p>
                 </div>
             </div>
+            
+            {/* menu for mobile */}
+            {isMobileMenuOpen && (
+                <div className="sm:hidden ">
+                    <Link className="block text-[#4F4F4F] ml-2">Home </Link>
+                    <Link className="block text-[#4F4F4F] ml-2 mt-2">Shop </Link>
+                    <Link className="block text-[#4F4F4F] ml-2 mt-2">Page </Link>
+                    <Link className="block text-[#4F4F4F] ml-2 mt-2">Blogs </Link>
+                    <Link className="block text-[#4F4F4F] ml-2 mt-2">Contract </Link>
+                    <Link className="block text-[#4F4F4F] ml-2 mt-2">Track Order </Link>
+                    <Link className='bg-[#27AE60] ml-2 mt-2 inline-flex items-center text-white px-3 py-1 rounded-full mr-48' ><CgMenuLeftAlt /> <span className='px-4'>All Categories</span> <FiChevronDown /></Link>
+                </div>
+            )}
 
         </nav>
     );

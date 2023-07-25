@@ -1,9 +1,10 @@
+import HeroSection from "./HeroSection/HeroSection";
 
 
 const Home = () => {
     return (
         <div>
-            <h1>This is home page form home.jsx</h1>
+            <HeroSection></HeroSection>
         </div>
     );
 };
