@@ -44,16 +44,16 @@ const Navbar = () => {
 
                 {/* account and cart section */}
                 <div className='flex items-center'>
-                    <p className='text-[#4F4F4F] mr-4'>
-                        <AiOutlineHeart />
-                    </p>
-                    <p className='ml-4 text-[#4F4F4F]'>
-                        <MdOutlineShoppingBag />
-                    </p>
-                    <span className='p-3 bg-[#F2F2F2] rounded-full ml-6'>
-                        <FiUser />
-                    </span>
-                    <p className='text-[#4F4F4F] ml-2 hidden sm:block'>Account</p>
+                    <Link className='text-[#4F4F4F] mr-4'><AiOutlineHeart /></Link>
+
+                    <Link className='ml-4 text-[#4F4F4F]'><MdOutlineShoppingBag /></Link>
+
+                    <Link className='text-[#4F4F4F]'>
+                        <span className='p-3 bg-[#F2F2F2] hover:bg-[#27AE60] hover:text-white rounded-full ml-6 mr-2 inline-flex'>
+                            <FiUser />
+                        </span>
+                        Account
+                    </Link>
                 </div>
 
                 <div className="sm:hidden">
@@ -61,12 +61,12 @@ const Navbar = () => {
                         onClick={handleMobileMenuToggle}
                         className="text-[#4F4F4F] focus:outline-none"
                     >
-                            {isMobileMenuOpen ? (
-                                <AiOutlineClose />
-                            ) : (
-                                <FiMenu />
-                            )}
-                        
+                        {isMobileMenuOpen ? (
+                            <AiOutlineClose />
+                        ) : (
+                            <FiMenu />
+                        )}
+
                     </button>
                 </div>
 
@@ -90,7 +90,7 @@ const Navbar = () => {
                     </p>
                 </div>
             </div>
-            
+
             {/* menu for mobile */}
             {isMobileMenuOpen && (
                 <div className="sm:hidden ">
